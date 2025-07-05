@@ -24,7 +24,7 @@ const AddProject = () => {
 			return;
 		}
 		try {
-			const res = await axios.post("http://192.168.31.133:8080/api/project", { projectTitle, members, category, technology, startDate, endDate, description, status});
+			const res = await axios.post("http://add_your_ip_address_followed_by_port:8080/api/project", { projectTitle, members, category, technology, startDate, endDate, description, status});
 			setResponse(res.data.message);
 			Alert.alert("Success", res.data.message);
 		} catch(error) {
@@ -56,18 +56,6 @@ const AddProject = () => {
 						onChangeText={setMembers}
 					/>
 				</View>
-				{/* <View style={styles.sectionStyling}>
-					<Text>Category <Text style={{color:"red"}}>*</Text></Text>
-					<View style={styles.inputText}>
-						<RNPickerSelect
-							onValueChange={(value) => setSelectedCategory(value)}
-							items={categories}
-							value={selectedCategory}	
-							TouchableWithoutFeedback={false}
-								
-						/>
-					</View>
-				</View> */}
 
 				<View style={styles.sectionStyling}>
 					<Text>Category <Text style={{color:"red"}}>*</Text></Text>
@@ -136,8 +124,7 @@ const AddProject = () => {
 					{response ? <Text style={{ marginTop: 10 }}>{response}</Text> : null}
 						<Text style={{color:"white", fontWeight: "bold"}}>Submit</Text>
 					</Pressable>
-					{/* <Button title="Submit" onPress={handleSubmit} />
-      				{response ? <Text style={{ marginTop: 10 }}>{response}</Text> : null} */}
+					
 					<Pressable style={styles.discardButton}>
 						<Text style={{color:"black", fontWeight: "bold"}}>Discard</Text>
 					</Pressable>
@@ -203,67 +190,4 @@ const styles = StyleSheet.create({
 	}
 
 });
-
-	// constructor(props) {
-	// 	super(props);
-
-	// 	state={
-	// 		projecttitle:"",
-	// 		teammembers:"",
-	// 		category:"",
-	// 		techused:"",
-	// 		projectdescription:"",
-	// 		status:""
-
-	// 	}
-	// }
-
-	// e.preventDefault();
-	// const newProject = {
-	// 	projectName,
-	// 	members,
-	// 	selectedCategory,
-	// 	technology,
-	// 	startDate,
-	// 	endDate,
-	// 	projectDescription,
-	// 	projectStatus,
-	// };
-	// try {
-	// 	await axios.post('http://localhost:8080/api/project', newProject);
-	// 	navigate('/api');
-	// } catch (error) {
-	// 	console.error('Error adding project:', error);
-	// }
-	// const handleSubmit = async(e) => {
-
-	// 	if(!projectTitle || !members || !category || !technology || !startdate || !enddate || !status) {
-	// 		Alert.alert("Error", "Please filll all * fields");
-	// 		return;
-	// 	}
-
-	// };
-
-
-		// const[selectedCategory, setSelectedCategory] = useState('English');
-	// const categories = [
-	// 	{ label: 'Web development', value: 'Web development'},
-	// 	{ label: 'Emebedded systems', value: 'Emebedded systems'},
-	// 	{ label: 'IOT', value: 'IoT'},
-	// 	{ label: 'App development', value: 'App development'},
-	// 	{ label: 'Cyber security', value: 'Cyber security'},
-	// 	{ label: 'Software testing', value: 'Software testing'},
-	// 	{ label: 'Data analytics', value: 'Data analytics'},
-	// ]
-
-		// const [date, setDate] = useState(new Date());
-	// const [show, setShow] = useState(false);
-	// const onChange = (event, selectedDate) => {
-	//   const currentDate = selectedDate || date;
-	//   setShow(Platform.OS === 'ios');
-	//   setDate(currentDate);
-	// };
-	// const showDatepicker = () => {
-	//   setShow(true);
-	// };
 

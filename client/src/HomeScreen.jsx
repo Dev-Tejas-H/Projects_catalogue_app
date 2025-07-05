@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, SafeAreaView, ScrollView, Pressable, Image, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, TextInput, View, SafeAreaView, ScrollView, Pressable, Image, FlatList, ActivityIndicator, RefreshControl } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import AddProject from './AddProject';
@@ -8,38 +8,11 @@ const SearchIcon = require("../assets/searchicon.png");
 
 const HomeScreen = ({navigator}) => {
     const navigation = useNavigation();
-    // const ProjectDetails = [
-	// 	{
-	// 		id:"1",
-	// 		title:"BEL",
-	// 		startdate:"27/08/2024",
-	// 		enddate:"03/09/2024",
-	// 		projectstatus:"pending"
-	// 	},
-	// 	{
-	// 		id:"2",
-	// 		title:"BekueiEL",
-	// 		startdate:"27/08/2024",
-	// 		enddate:"03/09/2024",
-	// 		projectstatus:"completed"
-	// 	},
-	// 	{
-	// 		id:"3",
-	// 		title:"ijijr",
-	// 		startdate:"27/08/2024",
-	// 		enddate:"03/09/2024",
-	// 		projectstatus:"not started"
-	// 	},
-	// 	{
-	// 		id:"4",
-	// 		title:"Tejas",
-	// 		startdate:"27/08/2024",
-	// 		enddate:"03/09/2024",
-	// 		projectstatus:"started"
-	// 	},
-	// ];
+
 	const [projects, setProjects] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [searchQuery, setSearchQuery] = useState("");
+
 
 	useEffect(() => {
 		fetchProjects();
@@ -57,12 +30,19 @@ const HomeScreen = ({navigator}) => {
 		}
 	};
 
+	const filteredProjects = projects.filter(project =>
+		project.projectTitle.toLowerCase().includes(searchQuery.toLowerCase())
+	);
+
 	const renderProjectItem = ({ item }) => (
-		<View style={styles.projectSection}>
+		<Pressable
+			style={styles.projectSection}
+			onPress={() => navigation.navigate("ProjectDetails", { projectId: item._id })}
+		>
 			<Text>{item.projectTitle}</Text>
 			<Text>{item.status}</Text>
-		</View>
-	)
+		</Pressable>
+	);
 
   return (
     <SafeAreaView>
@@ -86,6 +66,8 @@ const HomeScreen = ({navigator}) => {
 					placeholder="Search for projects"
 					style={{flex:1, fontWeight:'500',fontSize:16}}
 					placeholderTextColor={'#7C7E7E'}
+					onChangeText={text => setSearchQuery(text)}
+
 				/>
 			</View>
 			<Text style={{fontWeight:"bold"}}>Recent Projects...</Text>

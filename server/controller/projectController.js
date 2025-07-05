@@ -1,33 +1,5 @@
 import ProjectModel from "../model/projectModel.js"
-// import express from "express"
-// import mongoose from "mongoose"
-// import bodyParser from "body-parser"
-// import dotenv from "dotenv"
-// import cors from 'cors'
-// import colors from 'colors'
-// import morgan from "morgan"
-// code to create a new project details
 
-// export const create = async(req, res) => {
-
-//     try {
-//         const newProject = new ProjectModel(req.body);
-//         const { projectName } = newProject;
-
-//         const projectExist = await ProjectModel.findOne({ projectName });
-//         if(projectExist) {
-//             return res.status(400).json({message: "project already exists.."});
-//         }
-//         const savedData = await newProject.save();
-//         res.status(200).json(savedData);
-
-//     } catch (error) {
-//         res.status(500).json({errorMessage:error.message})
-//     }
-// }
-// const app = express();
-// app.use(cors());
-// app.use(bodyParser.json());
 
 export const create = async(req, res) => {
     try {
